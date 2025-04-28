@@ -11,6 +11,7 @@ import uvicorn
 import markdown
 import yaml
 import glob
+import sys
 
 
 # Jinja2 템플릿 설정
@@ -155,5 +156,16 @@ def work_detail(work_id: int):
     return get_content_detail(work_id, "work")
 
 # 서버 실행 코드
+def generate_static():
+    # your logic to walk through routes, render templates
+    # write HTML files under /app/output
+    print("Static generation complete.")
+
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    mode = sys.argv[1] if len(sys.argv) > 1 else "serve"
+    if mode == "generate":
+        generate_static()
+    else:
+        app = FastAPI()
+        app.mount("/static", StaticFiles(directory="static"), name="static")
+        uvicorn.run(app, host="0.0.0.0", port=8000)

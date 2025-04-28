@@ -19,4 +19,5 @@ COPY ./templates /app/templates
 COPY ./main.py /app/main.py
 
 # 4) 컨테이너 실행 시 정적 페이지 생성
-CMD ["python", "main.py"]
+ENTRYPOINT ["python", "main.py"]
+CMD ["generate"]  
