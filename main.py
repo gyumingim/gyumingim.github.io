@@ -93,7 +93,7 @@ app.add_middleware(
 )
 
 # 정적 파일 서빙 설정
-app.mount("/static", StaticFiles(directory="static", html=True), name="static")
+app.mount("./static", StaticFiles(directory="static", html=True), name="static")
 
 @app.get("/")
 @app.head("/")
