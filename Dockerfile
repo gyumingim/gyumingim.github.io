@@ -16,8 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 WORKDIR /app
 COPY ./static /app/static
 COPY ./templates /app/templates
-COPY ./main.py /app/main.py
+COPY main.py /app/main.py
 
-# 4) 컨테이너 실행 시 정적 페이지 생성
 ENTRYPOINT ["python", "main.py"]
-CMD ["generate"]  
+CMD ["generate"]

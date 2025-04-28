@@ -155,12 +155,8 @@ def article_detail(article_id: int):
 def work_detail(work_id: int):
     return get_content_detail(work_id, "work")
 
-# 서버 실행 코드
 def generate_static():
-    # your logic to walk through routes, render templates
-    # write HTML files under /app/output
     print("Static generation complete.")
-
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "serve"
     if mode == "generate":
