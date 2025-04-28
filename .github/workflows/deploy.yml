@@ -1,0 +1,28 @@
+name: Deploy to GitHub Pages
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3       # 레포 체크아웃 :contentReference[oaicite:6]{index=6}
+        with:
+          fetch-depth: 0
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and run container
+        run: |
+          docker build -t ssr-fastapi .
+          docker run --rm -v ${{ github.workspace }}/output:/app/output ssr-fastapi
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4  # 정적 파일 gh-pages 브랜치에 배포 :contentReference[oaicite:7]{index=7}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # 자동 생성 토큰 :contentReference[oaicite:8]{index=8}
+          publish_dir: ./output
+          publish_branch: gh-pages
