@@ -13,8 +13,10 @@ RUN apt-get update && \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY ./ ./app
-COPY main.py ./
+WORKDIR /app
+COPY ./static /app/static
+COPY ./templates /app/templates
+COPY ./main.py /app/main.py
 
 # 4) 컨테이너 실행 시 정적 페이지 생성
 CMD ["python", "main.py"]
