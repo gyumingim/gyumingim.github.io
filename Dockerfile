@@ -14,7 +14,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ./ ./app
-COPY render_static.py ./
+COPY main.py ./
 
 # 4) 컨테이너 실행 시 정적 페이지 생성
-CMD ["python", "render_static.py"]
+CMD ["python", "main.py"]
